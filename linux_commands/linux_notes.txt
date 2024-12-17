@@ -1,0 +1,29 @@
+Basic Linux Commands
+Let’s explore some essential Linux commands:
+
+Navigation Commands
+
+bash
+Copy code
+pwd           # Print the current directory
+ls            # List files in the current directory
+cd /path/to/dir  # Change directory
+cd ~          # Go to home directory
+File and Directory Operations
+
+bash
+Copy code
+mkdir my_folder       # Create a directory
+touch my_file.txt     # Create an empty file
+cp my_file.txt copy_file.txt  # Copy a file
+mv my_file.txt new_name.txt   # Rename or move a file
+rm new_name.txt       # Delete a file
+rmdir my_folder       # Delete a directory (only if empty)
+File Viewing
+
+bash
+Copy code
+cat my_file.txt      # View file content
+less my_file.txt     # View content page by page
+head my_file.txt     # Show first 10 lines
+tail my_file.txt     # Show last 10 lines
