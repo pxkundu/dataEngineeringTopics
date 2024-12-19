@@ -398,5 +398,195 @@ To **download files** in macOS, you can use the **Terminal** with commands like 
 Practice these commands until you’re comfortable. 
 
 ### **Linux Skills Evaluation**
-Once you feel comfortable with basic Linux commands, let me know, and we will move to the next part of **Module 1**: **Setting Up Python Environment and Basics of Python Programming**.
+Once we feel comfortable with basic Linux commands, we will move to the next part of **Module 1**: **Setting Up Python Environment and Basics of Python Programming**.
 
+
+Let’s move to the **next part** of Module 1: **Setting up the Python Environment and Learning Python Basics**.
+
+---
+
+## **1.2 Setting Up Python Environment**
+
+Python is widely used for data engineering tasks like data cleaning, transformation, and building pipelines. Let’s start with setting up the Python environment.
+
+---
+
+### **Step 1: Install Python**
+
+1. Check if Python is already installed:
+   ```bash
+   python3 --version
+   ```
+
+2. If not installed:
+   - **macOS/Linux**: Python 3 is pre-installed. Install or upgrade via `brew`:
+     ```bash
+     brew install python3
+     ```
+
+   - **Windows**:
+     - Download Python from [python.org](https://www.python.org/downloads/).
+     - Check the option **“Add Python to PATH”** during installation.
+
+3. Confirm installation:
+   ```bash
+   python3 --version
+   pip3 --version
+   ```
+
+---
+
+### **Step 2: Setting Up a Virtual Environment**
+
+A virtual environment keeps your Python libraries isolated, which is good practice.
+
+1. Install `venv` if not already present:
+   ```bash
+   pip3 install virtualenv
+   ```
+
+2. Create a virtual environment:
+   ```bash
+   python3 -m venv my_env
+   ```
+
+3. Activate the environment:
+   - On macOS/Linux:
+     ```bash
+     source my_env/bin/activate
+     ```
+   - On Windows:
+     ```bash
+     .\my_env\Scripts\activate
+     ```
+
+4. Deactivate the virtual environment:
+   ```bash
+   deactivate
+   ```
+
+---
+
+### **Step 3: Installing Essential Python Libraries**
+
+Install libraries needed for data engineering:
+```bash
+pip install pandas numpy matplotlib
+```
+
+Check installed packages:
+```bash
+pip list
+```
+
+---
+
+## **1.3 Python Basics: Key Concepts**
+
+Let’s start with **basic Python concepts** step-by-step.
+
+---
+
+### **Topic 1: Variables and Data Types**
+
+#### **Code Example**
+Create a file `basics.py` and write:
+```python
+# Variables and Data Types
+name = "Alice"
+age = 30
+is_engineer = True
+salary = 75000.50
+
+# Print variables
+print("Name:", name)
+print("Age:", age)
+print("Is Engineer:", is_engineer)
+print("Salary:", salary)
+
+# Data type checking
+print(type(name))
+print(type(age))
+print(type(is_engineer))
+print(type(salary))
+```
+
+**Run the code**:
+```bash
+python3 basics.py
+```
+
+---
+
+### **Topic 2: Lists and Loops**
+
+#### **Code Example**
+```python
+# List and Loops
+team = ["Alice", "Bob", "Charlie"]
+
+# Loop through a list
+for member in team:
+    print("Team Member:", member)
+
+# Add and remove items
+team.append("David")
+print("After Adding:", team)
+
+team.remove("Bob")
+print("After Removing:", team)
+```
+
+**Output**:
+```
+Team Member: Alice
+Team Member: Bob
+Team Member: Charlie
+After Adding: ['Alice', 'Bob', 'Charlie', 'David']
+After Removing: ['Alice', 'Charlie', 'David']
+```
+
+---
+
+### **Topic 3: Working with Dictionaries**
+
+Dictionaries are key-value pairs, widely used in data processing.
+
+#### **Code Example**
+```python
+# Dictionary Example
+employee = {
+    "Name": "Alice",
+    "Age": 30,
+    "Role": "Engineer",
+    "Salary": 75000
+}
+
+# Access values
+print("Employee Name:", employee["Name"])
+
+# Add new key-value pair
+employee["Department"] = "Data Engineering"
+print("Updated Dictionary:", employee)
+
+# Loop through keys and values
+for key, value in employee.items():
+    print(key, ":", value)
+```
+
+---
+
+### **Practice Task 1: Python Basics**
+1. Create a Python script named `python_basics.py`.
+2. Define:
+   - Variables: a string, an integer, a float, and a boolean.
+   - A list of numbers and find their sum using a loop.
+   - A dictionary to store personal details like name, age, and role.
+3. Print the values and use a loop to print the dictionary.
+
+---
+
+### **Next Steps**
+Once this is done, we’ll move on to **functions, exception handling**, and **working with files** in Python, which will prepare us for real-world data engineering tasks.
+
+Keep practicing! 🚀
