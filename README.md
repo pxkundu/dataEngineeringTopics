@@ -590,3 +590,232 @@ for key, value in employee.items():
 Once this is done, we’ll move on to **functions, exception handling**, and **working with files** in Python, which will prepare us for real-world data engineering tasks.
 
 Keep practicing! 🚀
+
+
+# Comprehensive Guide to Module 2: Hadoop Ecosystem and Advanced Concepts
+
+## Introduction to Hadoop
+Hadoop is a powerful framework for distributed storage and processing of big data. This module focuses on HDFS, YARN, MapReduce, and integrations like Sqoop, Flume, and Hive, covering both theoretical and practical aspects.
+
+---
+
+## Section 1: HDFS (Hadoop Distributed File System)
+
+### What is HDFS?
+HDFS is a distributed storage system that splits files into blocks and distributes them across a cluster. It ensures fault tolerance by replicating blocks across multiple nodes.
+
+### HDFS Architecture
+1. **NameNode**: Stores metadata and manages the directory structure.
+2. **DataNode**: Stores the actual file blocks.
+3. **Secondary NameNode**: Merges logs to ensure NameNode efficiency.
+
+### Read/Write Anatomy in HDFS
+- **Write Operation**: The client writes a file, which is split into blocks and replicated across DataNodes.
+- **Read Operation**: The client queries the NameNode for metadata and retrieves file blocks from DataNodes.
+
+### Installing Hadoop and Setting Up HDFS
+
+#### Steps to Install Hadoop
+1. **Prerequisites**:
+   - Install Java:
+     ```bash
+     sudo apt install openjdk-11-jdk
+     ```
+   - Download Hadoop:
+     ```bash
+     wget https://downloads.apache.org/hadoop/common/hadoop-3.3.5/hadoop-3.3.5.tar.gz
+     tar -xzvf hadoop-3.3.5.tar.gz
+     ```
+2. **Configuration**:
+   - Edit `core-site.xml` to set the default file system.
+   - Edit `hdfs-site.xml` to configure replication and storage paths.
+
+#### Starting HDFS Services
+```bash
+start-dfs.sh
+```
+
+### HDFS Commands
+
+1. **Create a Directory**:
+   ```bash
+   hdfs dfs -mkdir /user/data
+   ```
+2. **Upload a File**:
+   ```bash
+   hdfs dfs -put localfile.txt /user/data
+   ```
+3. **List Files**:
+   ```bash
+   hdfs dfs -ls /user/data
+   ```
+4. **Read a File**:
+   ```bash
+   hdfs dfs -cat /user/data/localfile.txt
+   ```
+5. **Delete a File**:
+   ```bash
+   hdfs dfs -rm /user/data/localfile.txt
+   ```
+
+**Tip**: Use `-du -h` to monitor HDFS disk usage efficiently.
+
+---
+
+## Section 2: YARN and MapReduce
+
+### What is YARN?
+YARN (Yet Another Resource Negotiator) manages cluster resources and job scheduling. It separates resource management and job execution into:
+1. **ResourceManager**: Allocates cluster resources.
+2. **NodeManager**: Monitors node-level resources.
+
+### Classical MapReduce Workflow
+1. **Map Phase**: Splits input data into key-value pairs.
+2. **Shuffle & Sort Phase**: Groups data by key.
+3. **Reduce Phase**: Processes grouped data.
+
+### Example: Word Count in MapReduce
+
+#### Mapper Code (`mapper.py`):
+```python
+#!/usr/bin/env python3
+import sys
+
+for line in sys.stdin:
+    words = line.strip().split()
+    for word in words:
+        print(f"{word}\t1")
+```
+
+#### Reducer Code (`reducer.py`):
+```python
+#!/usr/bin/env python3
+import sys
+from collections import defaultdict
+
+word_counts = defaultdict(int)
+
+for line in sys.stdin:
+    word, count = line.strip().split("\t")
+    word_counts[word] += int(count)
+
+for word, count in word_counts.items():
+    print(f"{word}\t{count}")
+```
+
+#### Running the Job
+1. Upload input data to HDFS:
+   ```bash
+   hdfs dfs -put input.txt /user/data/input
+   ```
+2. Execute MapReduce:
+   ```bash
+   hadoop jar /path/to/hadoop-streaming.jar \
+     -input /user/data/input \
+     -output /user/data/output \
+     -mapper mapper.py \
+     -reducer reducer.py
+   ```
+3. View the Output:
+   ```bash
+   hdfs dfs -cat /user/data/output/part-00000
+   ```
+
+**Tips**:
+- Use `Combiner` for local aggregation to improve performance.
+- Use `Partitioner` for custom key grouping.
+
+---
+
+## Section 3: Integrating DBMS with Hadoop
+
+### Setting Up MySQL
+1. Install MySQL:
+   ```bash
+   sudo apt install mysql-server
+   ```
+2. Create a Database and Table:
+   ```sql
+   CREATE DATABASE sales;
+   USE sales;
+   CREATE TABLE orders (id INT, product_name VARCHAR(255), quantity INT);
+   ```
+3. Insert Sample Data:
+   ```sql
+   INSERT INTO orders VALUES (1, 'Laptop', 5), (2, 'Mouse', 10);
+   ```
+
+### Sqoop: Import/Export Data
+1. **Import Data from MySQL to HDFS**:
+   ```bash
+   sqoop import --connect jdbc:mysql://localhost/sales \
+     --username root --password password \
+     --table orders --target-dir /user/data/orders
+   ```
+2. **Export Data from HDFS to MySQL**:
+   ```bash
+   sqoop export --connect jdbc:mysql://localhost/sales \
+     --username root --password password \
+     --table orders --export-dir /user/data/orders
+   ```
+
+---
+
+## Section 4: Flume
+
+### What is Flume?
+Flume is used to ingest logs and streaming data into Hadoop.
+
+### Setting Up Flume
+1. Install Flume:
+   ```bash
+   sudo apt install flume-ng
+   ```
+2. Configure `flume.conf`:
+   ```properties
+   agent1.sources = source1
+   agent1.sinks = sink1
+   agent1.channels = channel1
+
+   agent1.sources.source1.type = exec
+   agent1.sources.source1.command = tail -f /var/log/syslog
+
+   agent1.sinks.sink1.type = hdfs
+   agent1.sinks.sink1.hdfs.path = hdfs://localhost:9000/user/flume/logs
+   ```
+3. Start Flume:
+   ```bash
+   flume-ng agent --conf /path/to/conf --name agent1 -Dflume.root.logger=INFO,console
+   ```
+
+---
+
+## Section 5: Hive
+
+### What is Hive?
+Hive is a data warehouse infrastructure built on Hadoop for querying and analyzing data using SQL-like syntax.
+
+### Hive Concepts
+1. **Partitioning**: Organizes data into sub-directories.
+2. **Bucketing**: Divides data into fixed-size chunks.
+
+### Practical Example
+1. **Create Hive Table**:
+   ```sql
+   CREATE TABLE games (name STRING, rating INT)
+   ROW FORMAT DELIMITED
+   FIELDS TERMINATED BY ','
+   STORED AS TEXTFILE;
+   ```
+2. **Load Data**:
+   ```sql
+   LOAD DATA INPATH '/user/data/games.csv' INTO TABLE games;
+   ```
+3. **Query Data**:
+   ```sql
+   SELECT name, MAX(rating) AS top_rating FROM games GROUP BY name;
+   ```
+
+---
+
+This article covers the theoretical and practical aspects of Module 2 with real-world, reusable examples. Let me know if you’d like to expand or refine any section!
