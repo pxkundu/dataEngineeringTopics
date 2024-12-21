@@ -591,6 +591,528 @@ Once this is done, we’ll move on to **functions, exception handling**, and **w
 
 Keep practicing! 🚀
 
+### **Solution to Practice Task 1: Python Basics**
+
+Here’s a complete solution to the practice task:
+
+```python
+# Variables
+name = "John Doe"
+age = 25
+height = 5.9  # in feet
+is_student = True
+
+print("Name:", name)
+print("Age:", age)
+print("Height:", height)
+print("Is Student:", is_student)
+
+# List of numbers and finding their sum
+numbers = [10, 20, 30, 40, 50]
+total = 0
+for number in numbers:
+    total += number
+print("Sum of Numbers:", total)
+
+# Dictionary to store personal details
+personal_details = {
+    "Name": "John Doe",
+    "Age": 25,
+    "Role": "Data Engineering Learner"
+}
+
+# Print values from the dictionary
+print("Personal Details:")
+for key, value in personal_details.items():
+    print(f"{key}: {value}")
+```
+
+**Output:**
+```
+Name: John Doe
+Age: 25
+Height: 5.9
+Is Student: True
+Sum of Numbers: 150
+Personal Details:
+Name: John Doe
+Age: 25
+Role: Data Engineering Learner
+```
+
+---
+
+## **Next Step: Functions, Exception Handling, and File Operations**
+
+### **Topic 1: Functions**
+
+Functions allow you to organize code into reusable blocks.
+
+#### **Code Example**
+```python
+# Function to calculate the sum of a list of numbers
+def calculate_sum(numbers):
+    total = 0
+    for number in numbers:
+        total += number
+    return total
+
+# Using the function
+numbers = [10, 20, 30, 40, 50]
+print("Sum of Numbers:", calculate_sum(numbers))
+```
+
+---
+
+### **Topic 2: Exception Handling**
+
+Helps manage errors gracefully.
+
+#### **Code Example**
+```python
+# Function to divide two numbers with exception handling
+def divide_numbers(a, b):
+    try:
+        result = a / b
+    except ZeroDivisionError:
+        return "Error: Division by zero is not allowed!"
+    except TypeError:
+        return "Error: Please provide numbers!"
+    else:
+        return result
+
+print(divide_numbers(10, 2))  # Valid division
+print(divide_numbers(10, 0))  # Division by zero
+print(divide_numbers(10, "a"))  # Invalid type
+```
+
+**Output:**
+```
+5.0
+Error: Division by zero is not allowed!
+Error: Please provide numbers!
+```
+
+---
+
+### **Topic 3: File Operations**
+
+Data engineers work heavily with files. Let's learn to **read** and **write** files.
+
+#### **Code Example**
+```python
+# Write data to a file
+with open("data.txt", "w") as file:
+    file.write("Name,Age,Role\n")
+    file.write("Alice,30,Engineer\n")
+    file.write("Bob,25,Data Analyst\n")
+
+# Read data from a file
+with open("data.txt", "r") as file:
+    content = file.readlines()
+    for line in content:
+        print(line.strip())
+```
+
+**Output:**
+```
+Name,Age,Role
+Alice,30,Engineer
+Bob,25,Data Analyst
+```
+
+---
+
+### **Practice Task 2: Functions, Exception Handling, and File Operations**
+
+1. Write a function `calculate_average` to compute the average of a list of numbers.
+2. Write a program that:
+   - Takes a list of numbers from the user.
+   - Handles invalid input (e.g., entering a string instead of a number).
+   - Saves the valid numbers to a file named `numbers.txt`.
+   - Reads the numbers back from the file and calculates their average.
+
+---
+
+### **Solution to Practice Task 2: Functions, Exception Handling, and File Operations**
+
+Here’s a complete solution for the task:
+
+---
+
+#### **Solution Code**
+
+```python
+# Function to calculate the average of a list of numbers
+def calculate_average(numbers):
+    if len(numbers) == 0:
+        return 0
+    return sum(numbers) / len(numbers)
+
+# Function to get user input and validate it
+def get_numbers_from_user():
+    numbers = []
+    while True:
+        user_input = input("Enter a number (or type 'done' to finish): ")
+        if user_input.lower() == "done":
+            break
+        try:
+            number = float(user_input)  # Convert input to a float
+            numbers.append(number)
+        except ValueError:
+            print("Invalid input! Please enter a valid number.")
+    return numbers
+
+# Function to write numbers to a file
+def write_numbers_to_file(numbers, filename):
+    with open(filename, "w") as file:
+        for number in numbers:
+            file.write(f"{number}\n")
+
+# Function to read numbers from a file
+def read_numbers_from_file(filename):
+    numbers = []
+    with open(filename, "r") as file:
+        for line in file:
+            numbers.append(float(line.strip()))
+    return numbers
+
+# Main Program
+filename = "numbers.txt"
+
+# Step 1: Get numbers from user
+print("Enter numbers to calculate their average. Type 'done' when finished.")
+numbers = get_numbers_from_user()
+
+# Step 2: Write numbers to a file
+write_numbers_to_file(numbers, filename)
+print(f"Numbers saved to {filename}.")
+
+# Step 3: Read numbers from the file
+read_numbers = read_numbers_from_file(filename)
+print(f"Numbers read from file: {read_numbers}")
+
+# Step 4: Calculate and display the average
+average = calculate_average(read_numbers)
+print(f"The average of the numbers is: {average}")
+```
+
+---
+
+#### **Sample Run of the Program**
+
+**Input/Output:**
+```
+Enter numbers to calculate their average. Type 'done' when finished.
+Enter a number (or type 'done' to finish): 10
+Enter a number (or type 'done' to finish): 20
+Enter a number (or type 'done' to finish): abc
+Invalid input! Please enter a valid number.
+Enter a number (or type 'done' to finish): 30
+Enter a number (or type 'done' to finish): done
+Numbers saved to numbers.txt.
+Numbers read from file: [10.0, 20.0, 30.0]
+The average of the numbers is: 20.0
+```
+
+---
+
+### **Explanation**
+
+1. **`calculate_average(numbers)` Function**:
+   - Computes the average of a list of numbers using `sum(numbers) / len(numbers)`.
+
+2. **User Input Validation**:
+   - Accepts input in a loop until the user types "done".
+   - Converts valid inputs to floats and appends them to the list.
+   - Catches invalid inputs using `try-except`.
+
+3. **File Writing and Reading**:
+   - Writes each number to a new line in the file `numbers.txt`.
+   - Reads numbers back from the file and converts them to floats.
+
+---
+
+
+Here are **key and tricky points** that every Python and data engineering learner should keep in mind as they progress, along with examples to illustrate them.
+
+---
+
+### **1. Be Careful with Mutable Data Types**
+
+- Lists, dictionaries, and sets are **mutable**, meaning changes to one reference affect all references.
+
+#### **Example**
+```python
+# Mutable Example
+list_a = [1, 2, 3]
+list_b = list_a  # Both point to the same object
+list_b.append(4)
+
+print("list_a:", list_a)  # list_a is also modified
+print("list_b:", list_b)
+```
+
+**Output:**
+```
+list_a: [1, 2, 3, 4]
+list_b: [1, 2, 3, 4]
+```
+
+**Solution: Create a Copy Instead**
+```python
+list_a = [1, 2, 3]
+list_b = list_a.copy()  # Create a shallow copy
+list_b.append(4)
+
+print("list_a:", list_a)  # Original remains unchanged
+print("list_b:", list_b)
+```
+
+---
+
+### **2. Efficient File Handling with Generators**
+
+Processing large files efficiently is crucial in data engineering.
+
+#### **Example**
+```python
+# Inefficient: Loads the entire file into memory
+with open("large_file.txt", "r") as file:
+    lines = file.readlines()
+
+# Efficient: Reads one line at a time
+with open("large_file.txt", "r") as file:
+    for line in file:
+        print(line.strip())  # Process each line
+```
+
+---
+
+### **3. Avoid Hardcoding File Paths**
+
+Use `os` or `pathlib` for portability.
+
+#### **Example**
+```python
+import os
+
+# Portable path handling
+base_dir = os.path.dirname(os.path.abspath(__file__))  # Get current directory
+file_path = os.path.join(base_dir, "data", "dataset.csv")
+
+print("File Path:", file_path)
+```
+
+---
+
+### **4. Use Logging Instead of Print Statements**
+
+Logging is more robust and can be configured for different levels (e.g., DEBUG, INFO, ERROR).
+
+#### **Example**
+```python
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
+logging.info("Processing data...")
+logging.warning("Missing value encountered!")
+logging.error("File not found!")
+```
+
+**Output:**
+```
+INFO: Processing data...
+WARNING: Missing value encountered!
+ERROR: File not found!
+```
+
+---
+
+### **5. Handle Missing Data Gracefully**
+
+When working with data, missing or invalid values are common.
+
+#### **Example**
+```python
+import pandas as pd
+
+# Sample data with missing values
+data = {"Name": ["Alice", "Bob", None], "Age": [30, None, 25]}
+df = pd.DataFrame(data)
+
+# Fill missing values
+df["Name"].fillna("Unknown", inplace=True)
+df["Age"].fillna(df["Age"].mean(), inplace=True)
+
+print(df)
+```
+
+**Output:**
+```
+     Name   Age
+0   Alice  30.0
+1     Bob  27.5
+2  Unknown 25.0
+```
+
+---
+
+### **6. Avoid Memory Issues with Large Datasets**
+
+Use chunking to process large datasets efficiently.
+
+#### **Example**
+```python
+import pandas as pd
+
+# Process large CSV file in chunks
+chunk_size = 1000
+for chunk in pd.read_csv("large_dataset.csv", chunksize=chunk_size):
+    print("Processing chunk...")
+    print(chunk.head())
+```
+
+---
+
+### **7. Leverage Python Libraries for Efficiency**
+
+Don’t reinvent the wheel—use libraries like **Pandas, NumPy, PySpark**, etc., for complex tasks.
+
+#### **Example: Using Pandas for Data Transformation**
+```python
+import pandas as pd
+
+# Sample DataFrame
+data = {"Name": ["Alice", "Bob", "Charlie"], "Age": [30, 25, 35]}
+df = pd.DataFrame(data)
+
+# Add a new column
+df["Age in 5 Years"] = df["Age"] + 5
+
+# Filter rows
+filtered_df = df[df["Age"] > 30]
+
+print(filtered_df)
+```
+
+---
+
+### **8. Debug Code Effectively with `pdb`**
+
+Use Python’s debugger to troubleshoot.
+
+#### **Example**
+```python
+# Debugging Example
+import pdb
+
+def divide(a, b):
+    pdb.set_trace()  # Start the debugger
+    return a / b
+
+result = divide(10, 0)  # Will raise ZeroDivisionError
+```
+
+---
+
+### **9. Use SQL-Alike Syntax in Pandas**
+
+For data engineers transitioning from SQL to Python, Pandas allows SQL-like operations.
+
+#### **Example**
+```python
+import pandas as pd
+
+# Sample DataFrame
+data = {"Name": ["Alice", "Bob", "Charlie"], "Salary": [70000, 50000, 60000]}
+df = pd.DataFrame(data)
+
+# Query with a SQL-like filter
+high_salary = df.query("Salary > 55000")
+
+print(high_salary)
+```
+
+---
+
+### **10. Write Efficient and Readable Code**
+
+1. **List Comprehension**:
+   ```python
+   # Inefficient Loop
+   squares = []
+   for x in range(10):
+       squares.append(x**2)
+
+   # Efficient List Comprehension
+   squares = [x**2 for x in range(10)]
+   ```
+
+2. **Use Enumerate Instead of Range**:
+   ```python
+   items = ["apple", "banana", "cherry"]
+
+   for index, item in enumerate(items):
+       print(f"{index}: {item}")
+   ```
+
+---
+
+### **11. Optimize SQL Queries in Data Engineering**
+
+When integrating Python with databases, optimize SQL queries for large datasets.
+
+#### **Example: Query Optimization**
+```python
+import sqlite3
+
+# Use LIMIT for large datasets
+query = "SELECT Name, Age FROM employees WHERE Age > 30 LIMIT 1000"
+
+connection = sqlite3.connect("database.db")
+df = pd.read_sql_query(query, connection)
+print(df)
+```
+
+---
+
+### **12. Use Config Files for Parameters**
+
+Avoid hardcoding parameters in scripts. Use `.env` or config files.
+
+#### **Example**
+```python
+from dotenv import load_dotenv
+import os
+
+# Load .env file
+load_dotenv()
+
+# Read environment variable
+db_url = os.getenv("DATABASE_URL")
+print("Database URL:", db_url)
+```
+
+---
+
+### **Key Takeaways**
+1. **Keep Code Modular**: Break tasks into reusable functions.
+2. **Use Generators**: For large datasets to save memory.
+3. **Automate Testing**: Use `pytest` or `unittest` to ensure code reliability.
+4. **Secure Sensitive Data**: Use `.env` files for credentials.
+5. **Understand the Ecosystem**: Familiarize yourself with libraries like Pandas, NumPy, PySpark, and tools like Hadoop and Kafka.
+
+---
+
+### **Next Steps**
+Once you’ve understood and practiced this, we’ll move to the **Big Data section**, starting with **Hadoop Overview and History**, as outlined. Let me know when you’re ready! 🚀
+
+Once you're done with the task or need help solving it! After this, we will move to **study cases for Big Data** from the outline. 🚀
+
+
 
 # Comprehensive Guide to Module 2: Hadoop Ecosystem and Advanced Concepts
 
