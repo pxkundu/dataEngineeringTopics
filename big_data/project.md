@@ -1,4 +1,5 @@
 ### **Real-World Project: Building a Big Data Pipeline**
+### By: [Partha Sarathi Kundu](https://www.linkedin.com/in/partha-sarathi-kundu/recent-activity/articles/)
 
 #### **Project Use Case**
 **"E-Commerce Analytics Pipeline"**: 

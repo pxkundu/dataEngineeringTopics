@@ -1,5 +1,6 @@
 # dataEngineeringTopics
 Storage for my Data Engineering learning and reference codebase
+### By: [Partha Sarathi Kundu](https://www.linkedin.com/in/partha-sarathi-kundu/recent-activity/articles/)
 
 We will proceed step by step through the outline, starting from **Module 1**, treating you as a beginner and building concepts with hands-on code examples. I will pick **Python** as the language to start since it is beginner-friendly, widely used in data engineering, and covered in your outline.
 
