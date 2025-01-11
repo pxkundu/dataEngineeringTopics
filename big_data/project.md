@@ -203,5 +203,3 @@ Include a `README.md` file explaining:
 - How to run each component.
 
 ---
-
-Would you like a detailed `README.md` template or more elaboration on any component? Let me know! 🚀
