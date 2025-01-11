@@ -1,0 +1,38 @@
+
+{
+  "name": "SalesDataTransformationPipeline",
+  "properties": {
+    "activities": [
+      {
+        "name": "RawToProcessedData",
+        "type": "Notebook",
+        "linkedServiceName": {
+          "referenceName": "SynapseSparkPool",
+          "type": "LinkedServiceReference"
+        },
+        "typeProperties": {
+          "notebook": {
+            "referenceName": "transform_data",
+            "type": "NotebookReference"
+          },
+          "parameters": {
+            "rawDataPath": "abfss://raw@<storage_account>.dfs.core.windows.net/sales_data/",
+            "processedDataPath": "abfss://processed@<storage_account>.dfs.core.windows.net/sales_summary/"
+          }
+        },
+        "dependsOn": [],
+        "policy": {
+          "retry": 3,
+          "timeout": "00:10:00"
+        }
+      }
+    ],
+    "annotations": [],
+    "runtime": {
+      "integrationRuntime": {
+        "referenceName": "AutoResolveIntegrationRuntime",
+        "type": "IntegrationRuntimeReference"
+      }
+    }
+  }
+}
