@@ -1,0 +1,62 @@
+[
+    {
+        "user_id": "user_7",
+        "event_type": "purchase",
+        "product": "Camera",
+        "timestamp": 1736871945
+    },
+    {
+        "user_id": "user_6",
+        "event_type": "click",
+        "product": "Tablet",
+        "timestamp": 1736871946
+    },
+    {
+        "user_id": "user_4",
+        "event_type": "click",
+        "product": "Smartphone",
+        "timestamp": 1736871947
+    },
+    {
+        "user_id": "user_3",
+        "event_type": "view",
+        "product": "Laptop",
+        "timestamp": 1736871948
+    },
+    {
+        "user_id": "user_7",
+        "event_type": "view",
+        "product": "Laptop",
+        "timestamp": 1736871949
+    },
+    {
+        "user_id": "user_7",
+        "event_type": "purchase",
+        "product": "Laptop",
+        "timestamp": 1736871950
+    },
+    {
+        "user_id": "user_5",
+        "event_type": "click",
+        "product": "Camera",
+        "timestamp": 1736871951
+    },
+    {
+        "user_id": "user_7",
+        "event_type": "click",
+        "product": "Camera",
+        "timestamp": 1736871952
+    },
+    {
+        "user_id": "user_2",
+        "event_type": "click",
+        "product": "Smartphone",
+        "timestamp": 1736871953
+    },
+    {
+        "user_id": "user_9",
+        "event_type": "click",
+        "product": "Headphones",
+        "timestamp": 1736871954
+    }
+]
