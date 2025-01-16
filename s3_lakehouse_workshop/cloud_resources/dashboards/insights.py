@@ -8,6 +8,27 @@ dynamodb = boto3.resource('dynamodb')
 INSIGHTS_TABLE_NAME = 'DynamoDBStack-InsightsTableBE354BC6-1SZHT57IRKVQY'
 insights_table = dynamodb.Table(INSIGHTS_TABLE_NAME)
 
+def aggregate_insights_by_event_type():
+    """
+    Aggregates insights by event type and user from the DynamoDB InsightsTable.
+    Returns a list of dictionaries with user, event_type, and count.
+    """
+    # Scan the InsightsTable to retrieve all data
+    response = insights_table.scan()
+    items = response.get('Items', [])
+
+    # Aggregate the data
+    aggregated_data = []
+    for item in items:
+        aggregated_data.append({
+            "user": item['metric_key'],         # user_id
+            "event_type": item['metric_type'],  # event_type
+            "count": int(item['count'])         # Interaction count
+        })
+
+    return aggregated_data
+
+
 def aggregate_insights():
     """
     Aggregates insights data from the DynamoDB InsightsTable.

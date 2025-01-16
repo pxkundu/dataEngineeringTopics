@@ -1,8 +1,6 @@
-Here’s a detailed `README.md` for your `cloud_resources` folder:
-
----
-
 # **Cloud Resources - AWS CDK Configuration and Deployment Guide**
+
+### By: [Partha Sarathi Kundu](https://www.linkedin.com/in/partha-sarathi-kundu/recent-activity/articles/)
 
 This folder contains the AWS CDK configuration files for deploying the cloud infrastructure required for the project. The infrastructure includes the following resources:
 - **S3 Buckets** for storing raw and processed data.
@@ -209,3 +207,5 @@ cdk diff
 This guide should help developers set up and deploy the AWS infrastructure using CDK seamlessly. If you encounter any issues, feel free to reach out for support.
 
 --- 
+
+### By: [Partha Sarathi Kundu](https://www.linkedin.com/in/partha-sarathi-kundu/recent-activity/articles/)
