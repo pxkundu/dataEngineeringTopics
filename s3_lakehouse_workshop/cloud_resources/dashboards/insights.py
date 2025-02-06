@@ -5,7 +5,7 @@ from collections import defaultdict
 dynamodb = boto3.resource('dynamodb')
 
 # Connect to Insights Table
-INSIGHTS_TABLE_NAME = 'DynamoDBStack-InsightsTableBE354BC6-1SZHT57IRKVQY'
+INSIGHTS_TABLE_NAME = 'DynamoDBStack-InsightsTableBE354BC6-15SIZYEUQY4UK'
 insights_table = dynamodb.Table(INSIGHTS_TABLE_NAME)
 
 def aggregate_insights_by_event_type():
