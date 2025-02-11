@@ -132,3 +132,41 @@ spark.stop()
 ```
 
 ---
+In **Apache Spark**, you can **add new columns** to a **Parquet file** using **DataFrame transformations** and then overwrite or append the updated data back to the Parquet file.
+
+### **Command to Add New Columns in a Parquet File**
+1. **Read the existing Parquet file** into a DataFrame.
+2. **Use `.withColumn()`** to add a new column.
+3. **Write the updated DataFrame** back to the Parquet file.
+
+### **Example: Adding New Columns to a Parquet File**
+```python
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import lit
+
+# Initialize Spark Session
+spark = SparkSession.builder.appName("AddColumnToParquet").getOrCreate()
+
+# Read the existing Parquet file
+df = spark.read.parquet("path/to/input.parquet")
+
+# Add new columns (Example: 'new_column1' with a static value and 'new_column2' with dynamic computation)
+df_updated = df.withColumn("new_column1", lit("default_value")) \
+               .withColumn("new_column2", df["existing_column"] * 2)
+
+# Write the updated DataFrame back to Parquet
+df_updated.write.mode("overwrite").parquet("path/to/output.parquet")  # Overwrites existing data
+```
+
+### **Different Write Modes:**
+- **`overwrite`**: Replaces the existing Parquet file.
+- **`append`**: Adds new rows (but doesn't modify existing ones).
+- **`ignore`**: Doesn't write if the file already exists.
+
+### **Handling Schema Evolution (Appending New Columns Without Overwriting Existing Data)**
+If you want to **modify the schema dynamically** and **avoid full overwrite**, enable schema merging:
+```python
+df_updated.write.mode("append").option("mergeSchema", "true").parquet("path/to/parquet")
+```
+This ensures Spark **merges the new columns** instead of replacing the entire dataset.
+
